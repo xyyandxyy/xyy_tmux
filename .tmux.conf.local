@@ -269,14 +269,13 @@ tmux_conf_theme_right_separator_sub="|"
 #     - #{uptime_s}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
-#tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} | #{pretty_pane_current_path} "
-tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
+tmux_conf_theme_status_left="当前会话名称: #S"
+tmux_conf_theme_status_right=" 这是xyy的DIY TMUX | #{prefix}#{mouse}#{pairing}#{synchronized} | 当前用户是 #{username}#{root} | #{hostname} " 
 
 # status left style
-tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_7,$tmux_conf_theme_colour_8"
-tmux_conf_theme_status_left_bg="$tmux_conf_theme_colour_9,$tmux_conf_theme_colour_10,$tmux_conf_theme_colour_11"
-tmux_conf_theme_status_left_attr="bold,none,none"
+tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6"
+tmux_conf_theme_status_left_bg="$tmux_conf_theme_colour_9"
+tmux_conf_theme_status_left_attr="bold,none"
 
 # status right style
 tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_13,$tmux_conf_theme_colour_14"
@@ -290,7 +289,7 @@ tmux_conf_theme_pairing_bg="none"
 tmux_conf_theme_pairing_attr="none"
 
 # prefix indicator
-tmux_conf_theme_prefix="⌨"                  # U+2328
+tmux_conf_theme_prefix="👋"                  # U+1F44B
 tmux_conf_theme_prefix_fg="none"
 tmux_conf_theme_prefix_bg="none"
 tmux_conf_theme_prefix_attr="none"
@@ -382,6 +381,40 @@ tmux_conf_urlscan_options="--compact --dedupe"
 # -- user customizations -------------------------------------------------------
 
 # this is the place to override or undo settings
+# xyy: 把prefix改成`
+set -gu prefix2
+unbind C-a
+unbind C-b
+set -g prefix `
+bind ` send-prefix
+
+# xyy: 用=和-来划分窗口
+bind = split-window -h
+bind - split-window -v
+unbind '"'
+unbind %
+
+# xyy: 取消大写H/J/K/L调整窗格大小，改用小写h/j/k/l调整窗格大小
+unbind H
+unbind J
+unbind K
+unbind L
+bind h resize-pane -L 5
+bind j resize-pane -D 5
+bind k resize-pane -U 5
+bind l resize-pane -R 5
+
+# xyy: 重新绑定窗格移动键
+bind C-h select-pane -L
+bind C-j select-pane -D
+bind C-k select-pane -U
+bind C-l select-pane -R
+
+# xyy: 使用[和]前后切换窗口
+bind [ previous-window
+bind ] next-window
+
+bind C-f command-prompt -p 输入session名称: 'switch-client -t %%'
 
 # increase history size
 #set -g history-limit 10000
