@@ -15,7 +15,8 @@
 ```
 cd ~
 git clone --single-branch https://github.com/gpakosz/.tmux.git
-ln -s -f .tmux/.tmux.conf ~/.tmux.conf
+ln -s -f ~/xyy_tmux/.tmux.conf ~/.tmux.conf
+ln -s -f ~/xyy_tmux/.tmux.conf.local ~/.tmux.conf.local
 ```
 
 ## 状态栏
