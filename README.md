@@ -14,7 +14,7 @@
 
 ```
 cd ~
-git clone --single-branch https://github.com/gpakosz/.tmux.git
+git clone --single-branch https://github.com/xyyandxyy/xyy_tmux.git
 ln -s -f ~/xyy_tmux/.tmux.conf ~/.tmux.conf
 ln -s -f ~/xyy_tmux/.tmux.conf.local ~/.tmux.conf.local
 ```
